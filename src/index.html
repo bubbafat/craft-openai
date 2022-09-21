@@ -8,16 +8,34 @@
 
     <fieldSet>
       <div>
-        <label class="lbl">OpenAI Token</label>
-        <input type="password" name="openai-token" id="openai-token" class="inp">
+        <label class="lbl" for="openai-token">OpenAI Token</label>
+        <input type="password" name="openai-token" id="openai-token" class="inp"/>
       </div>
 
       <div>
-        <label class="lbl">Prompt</label>
-        <input type="text" name="openai-prompt" id="openai-prompt" class="inp">
+        <label class="lbl" for="openai-prompt">Prompt</label>
+        <input type="text" name="openai-prompt" id="openai-prompt" class="inp"/>
       </div>
-  </fieldSet>
-  <button id="btn-generate" class="btn">Generate</button>
+
+      <div>
+        <label class="lbl" for="openai-model">Algorithm</label>
+        <select name="openai-model" id="openai-model" class="inp"></select>
+      </div>
+
+      <div>
+        <label class="lbl" for="openai-length">Max Length</label>
+        <select name="openai-length" id="openai-length" class="inp">
+          <option value="256">256</option>
+          <option value="512">512</option>
+          <option value="1024">1024</option>
+          <option value="2048">2048</option>
+        </select>
+      </div>
+
+      <div>
+        <button id="btn-generate" class="btn">Generate</button>
+      </div>
+    </fieldSet>
 
   </body>
 </html>

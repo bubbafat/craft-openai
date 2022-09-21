@@ -18,15 +18,30 @@ window.addEventListener("load", () => {
 
   const logoImg = document.getElementById('craftx-logo') as HTMLImageElement
   logoImg.src = craftXIconSrc;
+
+  const oaiModelSelect = document.getElementById('openai-model') as HTMLSelectElement;
+
+  addModelSelect(OpenAIModel.Davinci002, oaiModelSelect);
+  addModelSelect(OpenAIModel.Curie001, oaiModelSelect);
+  addModelSelect(OpenAIModel.Babbage001, oaiModelSelect);
+  addModelSelect(OpenAIModel.Ada001, oaiModelSelect);
 });
+
+function addModelSelect(name: string, select: HTMLSelectElement) {
+  const opt = document.createElement("option");
+  opt.value = name;
+  opt.text = name;
+  select.add(opt, null);
+}
 
 function onGenerate() {
   console.log("onGenerate called");
 
   const token = (<HTMLInputElement>document.getElementById('openai-token')).value;
   const prompt = (<HTMLInputElement>document.getElementById('openai-prompt')).value;
+  const model = (<HTMLSelectElement>document.getElementById('openai-model')).value;
 
-  const query = buildOAIQuery(prompt, 'text-babbage-001');
+  const query = buildOAIQuery(prompt, model);
 
   const promptBlock = craft.blockFactory.textBlock({
     content: query.prompt
@@ -58,10 +73,15 @@ function onGenerate() {
   });
 }
 
-type OpenAIModel = 'text-davinci-002' | 'text-curie-001' | 'text-babbage-001' | 'text-ada-001';
+enum OpenAIModel {
+  Davinci002 = 'text-davinci-002',
+  Curie001 = 'text-curie-001',
+  Babbage001 = 'text-babbage-001',
+  Ada001 = 'text-ada-001'
+}
 
 type OpenAIQuery = {
-  model: OpenAIModel;
+  model: string;
   prompt: string;
   temperature: number;
   max_tokens: number;
@@ -70,10 +90,10 @@ type OpenAIQuery = {
   presence_penalty: number;
 }
 
-function buildOAIQuery(promptStr: string, modelStr: OpenAIModel) {
+function buildOAIQuery(promptStr: string, algorithm: string) {
   const model: OpenAIQuery =
   {
-    model: modelStr,
+    model: algorithm,
     prompt: promptStr,
     temperature: 0.7,
     max_tokens: 256,
