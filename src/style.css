@@ -22,6 +22,21 @@ body.dark {
   cursor: pointer;
 }
 
+.formbox {
+  width: 95%;
+}
+
+.lbl {
+  font-size: 16px;
+}
+
+.inp {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius:10px;
+  width: 95%;
+}
+
 body.dark .btn {
   background-color: #464646;
   color: #cfcfcf;
